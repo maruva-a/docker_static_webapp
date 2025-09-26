@@ -1,11 +1,85 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>Docker Static WebApp</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Docker Static WebApp</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <h1>Hello, Docker Static WebApp!</h1>
-    <p>This page is served using Docker and Nginx.</p>
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>Hello, Docker Static WebApp!</h1>
+      <p class="tagline">This page is served using Docker + Nginx — now with a colorful theme 🎨</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#about">About</a>
+        <a class="btn outline" href="#docker-commands">Docker Tips</a>
+      </div>
+    </div>
+    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <path d="M0,0 C360,80 1080,0 1440,80 L1440 0 L0 0 Z"></path>
+    </svg>
+  </header>
+
+  <main class="container">
+    <section id="about" class="card">
+      <h2>About this project</h2>
+      <p>
+        A simple static web application served from an <strong>Nginx</strong> container. The project is
+        containerised with <strong>Docker</strong> and deployed via a CI/CD pipeline (Jenkins).
+      </p>
+      <ul>
+        <li>Static files: <code>index.html</code>, <code>style.css</code></li>
+        <li>Image: <code>nginx:alpine</code></li>
+        <li>Expose port: <code>80</code> (host port mapped by docker-compose)</li>
+      </ul>
+    </section>
+
+    <section id="docker-commands" class="grid">
+      <article class="card">
+        <h3>Run locally (Docker)</h3>
+        <pre class="code">
+docker build -t my-static-web .
+docker run -d --name my-static-web -p 8081:80 my-static-web
+        </pre>
+        <p class="muted">Then open <code>http://&lt;server-ip&gt;:8081</code></p>
+      </article>
+
+      <article class="card">
+        <h3>Using docker-compose</h3>
+        <pre class="code">
+docker-compose up -d --build
+docker-compose down
+        </pre>
+        <p class="muted">Compose file uses <code>80</code> inside the container; host port is configurable.</p>
+      </article>
+
+      <article class="card highlight">
+        <h3>CI/CD (Jenkins)</h3>
+        <p>Automated pipeline builds the image, stops old container and runs the new one.</p>
+        <ol>
+          <li>Checkout from GitHub</li>
+          <li>docker build &amp; docker run / docker-compose</li>
+          <li>Verify deployment</li>
+        </ol>
+      </article>
+    </section>
+
+    <section class="card metrics">
+      <h2>Project Summary</h2>
+      <div class="metrics-row">
+        <div class="metric"><span class="num">Docker</span><span class="lbl">Container</span></div>
+        <div class="metric"><span class="num">Nginx</span><span class="lbl">Server</span></div>
+        <div class="metric"><span class="num">Jenkins</span><span class="lbl">CI</span></div>
+      </div>
+      <p class="muted">Tip: If you want live container stats on the page, expose an endpoint from the server and fetch it via JS.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Made with ❤️ — Docker + Nginx</p>
+    <p class="muted">Replace files and run <code>docker-compose up -d --build</code> to update the site.</p>
+  </footer>
 </body>
 </html>
+
