@@ -6,7 +6,7 @@ pipeline {
         IMAGE_NAME = "docker_static_webapp-web"
         CONTAINER_NAME = "docker_static_webapp-web-1"
         GIT_REPO = "https://github.com/maruva-a/docker_static_webapp.git"
-        HOST_PORT = "80"   // Change if you want a different host port
+        HOST_PORT = "8081"   // Change if you want a different host port
     }
 
     stages {
