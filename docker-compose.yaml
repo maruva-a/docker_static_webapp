@@ -5,6 +5,8 @@ services:
     build: .
     ports:
       - "80:80"
+    # No volumes needed since Dockerfile copies files
+
     # Remove volume reference if you are copying all files directly
     # volumes:
     #   - ./web:/usr/share/nginx/html
